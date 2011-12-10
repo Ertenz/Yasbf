@@ -60,7 +60,7 @@ Well...that's not that hard, just modify the [css stylesheet](https://github.com
 How to migrate from Wordpress to Yasbf?
 --------
 
-I didn't test this myself...but it should work... just use [this](https://github.com/jainbasil/htmlGenerator) tool to Convert all your Wordpress Posts into raw html files...the only thing you have to do then is moving all html files it has generated to the [posts](https://github.com/Poapfel/Yasbf/tree/master/posts) folder.
+I didn't test this myself...but it should work... just use [this](https://github.com/jainbasil/htmlGenerator) tool to Convert all your Wordpress Posts into raw html files...the only thing you have to do then is moving all html files the tool has generated to the [posts](https://github.com/Poapfel/Yasbf/tree/master/posts) folder.
 
 To-Do
 --------
