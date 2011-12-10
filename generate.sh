@@ -14,7 +14,7 @@ github="Poapfel" #Insert your github username here
 
 #########################
 #                       #
-#    Config - End       #
+#     Config - End      #
 #                       #
 #########################
 
@@ -22,11 +22,17 @@ meta=$(awk '{sub(/\$name/,name);sub(/\$author/,author);sub(/\$description/,descr
 
 header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,description);sub(/\$twitter/,twitter)}1' name="$name" github="$github" description="$description" twitter="$twitter" templates/header.html)
 
-article=
+cd posts
+for file in `ls --format=single-column *`; do
+	leet="$(<"$file")"
+    leet="<h1>${leet/$'\n'/</h1>$'\n'}";
+    article="$article$leet"
+done
+cd ..
 
-footer=
+footer=$(awk '{sub(/\$author/,author);}1' author="$author" templates/footer.html)
 
-html="$meta $header"
+html="$meta $header <article>$article</article> $footer"
 
 if [ -f "index.html" ];
 then
