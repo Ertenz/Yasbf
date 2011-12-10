@@ -55,6 +55,11 @@ How to apply a custom Theme?
 
 Well...that's not that hard, just modify the [css stylesheet](https://github.com/Poapfel/Yasbf). For andvanced configuration modify the html files in the folder [templates](https://github.com/Poapfel/Yasbf/tree/master/templates).
 
+How to migrate from Wordpress to Yasbf?
+--------
+
+I didn't test this but it should work if you just use [this](https://github.com/jainbasil/htmlGenerator) the only thing you have to do then is moving all html files it has generated to the [posts](https://github.com/Poapfel/Yasbf/tree/master/posts) folder.
+
 --------
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Poapfel&url=https://github.com/Poapfel/Yasbf&title=Yasbf&language=en_GB&tags=github&category=software)
