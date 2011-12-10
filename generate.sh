@@ -26,8 +26,8 @@ header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,des
 cd posts
 for file in `ls --format=single-column *`; do
 	leet="$(<"$file")"
-    leet="<h1>${leet/$'\n'/</h1>$'\n'}";
-    article="$article$leet"
+	leet="<h1>${leet/$'\n'/</h1>$'\n'}";
+	article="$article$leet"
 done
 cd ..
 
@@ -37,6 +37,7 @@ html="$meta $header <article>$article</article> $footer"
 
 if [ -f "index.html" ];
 then
-rm index.html
+	rm index.html
 fi
+
 echo $html | tr '\r' ' ' >> index.html
