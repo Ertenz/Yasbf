@@ -46,5 +46,5 @@ Create a file named zombies.html in the posts Folder and add the following conte
 How to apply a custom Theme?
 --------
 
-Well...that's not that just modify the css stylesheet. For andvanced configuration modify the html files in the folder templates.
+Well...that's not that hard, just modify the css stylesheet. For andvanced configuration modify the html files in the folder templates.
 
