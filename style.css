@@ -1,4 +1,6 @@
 body {
+	margin: 0;
+    padding: 0;
 	background-color: #f7f7f7;
 	color: #222222;
 	font-family: Georgia, serif;
@@ -6,9 +8,10 @@ body {
 }
 
 header {
+	border-top: 3px solid #8F8F8F;
 	color: white;
 	background-color: #444444;
-	height: 180px;
+	height: 120px;
 	width: 100%;
 	-moz-box-shadow:0px 5px 7px #c5c5c5;
 	-webkit-box-shadow:0px 5px 7px #c5c5c5;
@@ -16,7 +19,23 @@ header {
 }
 
 header h1 {
+	margin-left: 23%;
+	margin-top: 5px;
+}
 
+header #description {
+	margin-left: 23%;
+	margin-top: -10px;
+}
+
+header nav {
+	margin-left: 23%;
+	margin-top: 15px;
+}
+
+header a {
+	text-decoration: underline;
+	color: white;
 }
 
 article {
