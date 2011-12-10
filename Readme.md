@@ -8,8 +8,6 @@ How to install it?
 ### Getting the source: ######
 
 	$ git clone git://github.com/Poapfel/Yasbf.git
-	$ mv Yasbf weblog
-	$ cd weblog
 
 ### Basic configuration: ######
 
