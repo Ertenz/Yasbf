@@ -11,6 +11,8 @@ How to install it?
 
 ### Basic configuration: ######
 
+	$ cd Yasbf
+
 Open the file generate.sh with your favorite text editor and fill in the informations from line [9](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L9) to line [13](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L13), do not edit anything below line [14](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L14) if you don't now what you are doing! 
 Besides you have to uncomment or remove the line [14](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L14) else it will not work.
 
