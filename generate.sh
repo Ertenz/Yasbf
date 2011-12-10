@@ -6,11 +6,12 @@
 #                       #
 #########################
 
-author="Me" #Insert your name here
-name="test123" #Insert the name of your site here
-description="This is just a test" #Insert a description of your site here
-twitter="Poapfel" #Insert your twitter username here
-github="Poapfel" #Insert your github username here
+author="" #Insert your name here
+name="" #Insert the name of your site here
+description="" #Insert a description of your site here
+twitter="" #Insert your twitter username here
+github="" #Insert your github username here
+exit #RTFM protection just uncomment or remove this line if you configured the lines above
 
 #########################
 #                       #
