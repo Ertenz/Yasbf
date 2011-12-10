@@ -1,0 +1,28 @@
+body {
+	background-color: #f7f7f7;
+	color: #222222;
+	font-family: Georgia, serif;
+	font-size: 16px;
+}
+
+header {
+	color: white;
+	background-color: #444444;
+	height: 180px;
+	width: 100%;
+	-moz-box-shadow:0px 5px 7px #c5c5c5;
+	-webkit-box-shadow:0px 5px 7px #c5c5c5;
+	box-shadow:0px 5px 7px #c5c5c5;
+}
+
+header h1 {
+
+}
+
+article {
+
+}
+
+footer {
+
+}
