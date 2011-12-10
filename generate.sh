@@ -19,6 +19,8 @@ exit #RTFM protection just uncomment or remove this line if you configured the l
 #                       #
 #########################
 
+year=$(date +%Y)
+
 meta=$(awk '{sub(/\$name/,name);sub(/\$author/,author);sub(/\$description/,description);}1' name="$name" author="$author" description="$description" templates/meta.html)
 
 header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,description);sub(/\$twitter/,twitter)}1' name="$name" github="$github" description="$description" twitter="$twitter" templates/header.html)
@@ -31,7 +33,7 @@ for file in `ls --format=single-column *`; do
 done
 cd ..
 
-footer=$(awk '{sub(/\$author/,author);}1' author="$author" templates/footer.html)
+footer=$(awk '{sub(/\$author/,author);sub(/\$year/,year);}1' author="$author" year="$year" templates/footer.html)
 
 html="$meta $header <article>$article</article> $footer"
 
