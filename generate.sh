@@ -25,9 +25,9 @@ header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,des
 
 cd posts
 for file in `ls --format=single-column *`; do
-	leet="$(<"$file")"
-	leet="<h1>${leet/$'\n'/</h1>$'\n'}";
-	article="$article$leet"
+	placeholder="$(<"$file")"
+	placeholder="<h1>${placeholder/$'\n'/</h1>$'\n'}";
+	article="$article$placeholder"
 done
 cd ..
 
