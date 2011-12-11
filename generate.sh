@@ -26,10 +26,11 @@ meta=$(awk '{sub(/\$name/,name);sub(/\$author/,author);sub(/\$description/,descr
 header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,description);sub(/\$twitter/,twitter)}1' name="$name" github="$github" description="$description" twitter="$twitter" templates/header.html)
 
 cd posts
-for file in `ls --format=single-column *`; do
-	placeholder="$(<"$file")"
-	placeholder="<h1>${placeholder/$'\n'/</h1>$'\n'}";
-	article="$article$placeholder"
+for f in *
+do
+	headline="$(<"$f")"
+	headline="<h1>${headline/$'\n'/</h1>$'\n'}";
+	article="$article$headline"
 done
 cd ..
 
