@@ -32,7 +32,6 @@ do
 	headline="$(<"$f")"
 	headline="<h1><a href="\"\#$aname\"">${headline/$'\n'/</a></h1>$'\n'}";
 	article="$article$headline"
-	echo "$aname"
 done
 cd ..
 
