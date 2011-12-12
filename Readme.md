@@ -65,8 +65,9 @@ I didn't test this myself...but it should work... just use [this](https://github
 To-Do
 --------
 
+- Published Dates for posts
 - RSS Feed
-- "Real" Archives
+- Archives
 - Polished design
 - Optimized code
 - and more...
