@@ -45,10 +45,20 @@ article {
 	margin-right: 23%;
 }
 
-article h1 {
+article h1 a {
 	margin-top: 30px;
 	font-family: 'Vollkorn', serif;
 	font-size: 30px;
+	text-decoration: none;
+}
+
+article h1 a:visited {
+	text-decoration: none;
+}
+
+article h1 a:hover {
+	color: #222222;
+	text-decoration: underline;
 }
 
 article a {

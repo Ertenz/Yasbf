@@ -28,9 +28,11 @@ header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,des
 cd posts
 for f in *
 do
+	aname=$(echo "$f" | sed 's/\(.*\)\..*/\1/')
 	headline="$(<"$f")"
-	headline="<h1>${headline/$'\n'/</h1>$'\n'}";
+	headline="<h1><a href="\"\#$aname\"">${headline/$'\n'/</a></h1>$'\n'}";
 	article="$article$headline"
+	echo "$aname"
 done
 cd ..
 
