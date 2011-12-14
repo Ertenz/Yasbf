@@ -25,15 +25,29 @@ meta=$(awk '{sub(/\$name/,name);sub(/\$author/,author);sub(/\$description/,descr
 
 header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,description);sub(/\$twitter/,twitter)}1' name="$name" github="$github" description="$description" twitter="$twitter" templates/header.html)
 
+cd templates
+if [ -f "article.html" ];
+then
+	rm article.html
+fi
+cd ..
+
 cd posts
 for f in *
 do
 	aname=$(echo "$f" | sed 's/\(.*\)\..*/\1/')
-	headline="$(<"$f")"
-	headline="<h1><a href="\"\#$aname\"">${headline/$'\n'/</a></h1>$'\n'}";
-	article="$article$headline"
+	headline="<h1><a href="\"\#$aname\"">$(sed -n 1p $f)</a></h1>"
+	postdate="<h3>$(sed -n 2p $f)</h3>"
+	article="$headline $postdate $(sed -n '4,$p' $f)"
+	cd ..
+	cd templates
+	echo $article | tr '\r' ' ' >> article.html
+	cd ..
+	cd posts
 done
 cd ..
+
+article=$(cat templates/article.html)
 
 footer=$(awk '{sub(/\$author/,author);sub(/\$year/,year);}1' author="$author" year="$year" templates/footer.html)
 
