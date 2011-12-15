@@ -13,7 +13,7 @@ Install
 
 	$ cd Yasbf
 
-Open the file ![generate.sh](https://github.com/Poapfel/Yasbf/blob/master/generate.sh) with your favorite editor and fill in the informations form line [9](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L9) to [14](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L14). Then uncomment or delete the line [15](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L15).
+Open the file [generate.sh](https://github.com/Poapfel/Yasbf/blob/master/generate.sh) with your favorite editor and fill in the informations form line [9](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L9) to [14](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L14). Then uncomment or delete the line [15](https://github.com/Poapfel/Yasbf/blob/master/generate.sh#L15).
 
 ### Generating everything for the first time: ######
 
