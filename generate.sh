@@ -6,13 +6,13 @@
 #                       #
 #########################
 
-author="Poapfel" #Insert your name here
-name="/dev/random/" #Insert the name of your site here
-description="Coding is magic." #Insert a description of your site here
-twitter="Poapfel" #Insert your twitter username here
-github="Poapfel" #Insert your github username here
-link="http://poapfel.net/Yasbf" #Link to your Yasbf instance for example: http://example.com/Yasbf
-#echo "RTFM" & exit #RTFM protection just uncomment or remove this line if you configured the lines above
+author="" #Insert your name here
+name="" #Insert the name of your site here
+description="" #Insert a description of your site here
+twitter="" #Insert your twitter username here
+github="" #Insert your github username here
+link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
+echo "RTFM" & exit #RTFM protection just uncomment or remove this line if you configured the lines above
 
 #########################
 #                       #
