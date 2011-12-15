@@ -28,7 +28,8 @@ You have sucessfull generated your fist Yasbf site.
 How to write a Blog Post?
 --------
 
-Creating new Blog post is relativly simple, just create a html file in the folder [posts](https://github.com/Poapfel/Yasbf/tree/master/posts), be carefull the filename should not contain any special characters. To define a headline just enter the headline in the very first line of your Blog Post, leave the second line blank and the 'real' Blog post begins at the third line. 
+Creating new Blog post is relativly simple, just create a html file in the folder [posts](https://github.com/Poapfel/Yasbf/tree/master/posts), be carefull the filename should not contain any special characters. To define a headline just enter the headline in the very first line of your blog post, enter the date(the blog post) was created in the second line, leave the
+third line blank and the 'real' blog post begins at line number 4.
 Besides you can use normal html tags like a href and so on in your Blog Posts...
 And don't forget to regenerate the entire Blog after saving the Blog Post...
 
@@ -65,8 +66,6 @@ I didn't test this myself...but it should work... just use [this](https://github
 To-Do
 --------
 
-- Published Dates for posts
-- RSS Feed
 - Archives
 - Polished design
 - Optimized code
