@@ -12,7 +12,7 @@ description="" #Insert a description of your site here
 twitter="" #Insert your twitter username here
 github="" #Insert your github username here
 link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
-echo "RTFM" & exit #RTFM protection just uncomment or remove this line if you configured the lines above
+echo "RTFM" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
 
 #########################
 #                       #
@@ -36,10 +36,10 @@ do
 	headline="<h1><a href="\"\#$postlink\"">$(sed -n 1p $file)</a></h1>"
 	postdate="<h3>$(sed -n 2p $file)</h3>"
 	article="$headline $postdate $(sed -n '4,$p' $file)"
-	postfeed="<item><title>$(sed -n 1p $file)</title><pubDate>$(sed -n 2p $file)</pubDate><description>$(sed -n '4,$p' $file)</description><link>$link/#$postlink</link></item>"
+	itemfeed="<item><title>$(sed -n 1p $file)</title><pubDate>$(sed -n 2p $file)</pubDate><description>$(sed -n '4,$p' $file)</description><link>$link/#$postlink</link></item>"
 	cd ..
 	echo $article | tr '\r' ' ' >> article.html
-	echo $postfeed | tr '\r' ' ' >> postfeed.xml
+	echo $itemfeed | tr '\r' ' ' >> itemfeed.xml
 	cd posts
 done
 cd ..
@@ -60,9 +60,9 @@ then
 	rm feed.xml
 fi
 
-postfeed=$(cat postfeed.xml)
-feed="$metafeed $postfeed </channel></rss>"
+itemfeed=$(cat itemfeed.xml)
+feed="$metafeed $itemfeed </channel></rss>"
 
 echo $feed | tr '\r' ' ' >> feed.xml
 rm article.html
-rm postfeed.xml
+rm itemfeed.xml
