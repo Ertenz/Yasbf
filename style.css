@@ -13,7 +13,6 @@ header {
 	background-color: #444444;
 	height: 120px;
 	width: 100%;
-	margin-bottom: 50px;
 	-moz-box-shadow:0px 5px 7px #c5c5c5;
 	-webkit-box-shadow:0px 5px 7px #c5c5c5;
 	box-shadow:0px 5px 7px #c5c5c5;
@@ -44,8 +43,11 @@ article {
 	margin-right: 23%;
 }
 
+article h1 {
+	margin-top: 50px;
+}
+
 article h1 a {
-	margin-top: 30px;
 	font-family: serif;
 	font-weight: bold;
 	font-size: 30px;
