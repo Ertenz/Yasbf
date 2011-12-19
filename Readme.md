@@ -38,7 +38,8 @@ Just modify the [stylesheet](https://github.com/Poapfel/Yasbf/blob/master/style.
 To-Do
 --------
 
-- Archives
+- The index file shouldn't contain all blog posts
+- It should only generate files which have changed
 - Polished design
 - Optimized code
 - New [favicon](https://github.com/Poapfel/Yasbf/blob/master/images/favicon.png)

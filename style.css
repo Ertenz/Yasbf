@@ -81,6 +81,14 @@ article h3 {
 	font-size: small;
 }
 
+article ul#archives {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	font-size: 18px;
+	list-style-type: none;
+	margin-left: 20px;
+}
+
 footer {
 	margin-left: 23%;
 	margin-right: 23%;
