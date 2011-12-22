@@ -25,7 +25,7 @@ Blog post
 
 	$ cd posts
 	
-Create a new html file in [this](https://github.com/Poapfel/Yasbf/tree/master/posts) folder and give it a name for example: helloworld.html. The first line of this html file has to be the headline for example: Hello World! The second line defines the date the post was written on(The date has to look like this MM-DD-YY for example 12-16-11). The third line has to be blank. The "real" blog post begins at line 4.
+Create a new html file in [this](https://github.com/Poapfel/Yasbf/tree/master/posts) folder and give it a name for example: helloworld.html. The first line of this html file has to be the headline for example: Hello World! The second line defines the date the post was written on(The date has to look like this MM-DD-YY HH:MM for example 12-10-11 13:37). The third line has to be blank. The "real" blog post begins at line 4.
 After saving the file you will have to regenerate the blog...
 
 	$ ./generate.sh

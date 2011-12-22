@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-    padding: 0;
+	padding: 0;
 	background-color: #f7f7f7;
 	color: #222222;
 	font-family: Georgia, serif;
@@ -100,6 +100,7 @@ footer {
 	margin-left: 23%;
 	margin-right: 23%;
 	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 footer a {
