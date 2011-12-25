@@ -12,7 +12,7 @@ description="" #Insert a description of your site here
 twitter="" #Insert your twitter username here
 github="" #Insert your github username here
 link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
-echo "RTFM" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
+echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
 
 #########################
 #                       #
@@ -49,10 +49,13 @@ do
 	filename="$(echo "$key" | sed 's/.*,//')"
 	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
 	postlink="/archives/$postdate/$filename"
+	rssdate="$(sed -n 2p $filename)"
+	rssdate="$(echo $rssdate | sed 's#^\([0-9\-]\{5\}\)-\([0-9]\{2\}\)#\2-\1#')"
+	rssdate="$(date --date="$rssdate")"
 	headline="<h1><a href="\".$postlink\"">$(sed -n 1p $filename)</a></h1>"
 	h3="<h3>$postdate</h3>"
 	article="$headline $h3 $(sed -n '4,$p' $filename)"
-	itemfeed="<item><title>$(sed -n 1p $filename)</title><pubDate>$postdate</pubDate><description>$(sed -n '4,$p' $filename)</description><link>$link$postlink</link></item>"
+	itemfeed="<item><title>$(sed -n 1p $filename)</title><pubDate>$rssdate</pubDate><description><![CDATA[$(sed -n '4,$p' $filename)]]></description><link>$link$postlink</link><guid>$link$postlink</guid></item>"
 	if [ ! -d "../archives/$postdate" ]; then
 		mkdir "../archives/$postdate"
 	fi
