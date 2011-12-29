@@ -35,9 +35,15 @@ Custom Theme
 
 Just modify the [stylesheet](https://github.com/Poapfel/Yasbf/blob/master/style.css). Besides you can always edit the html template files, these are located in the folder ["templates"](https://github.com/Poapfel/Yasbf/tree/master/templates).
 
+License
+--------
+
+See [LICENSE.txt](https://github.com/Poapfel/Yasbf/blob/master/LICENSE.txt).
+
 To-Do
 --------
 
+- Disqus comments (?)
 - The index file shouldn't contain all blog posts
 - It should only generate files which have changed
 - Polished design
