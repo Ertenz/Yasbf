@@ -22,7 +22,9 @@ echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line i
 
 #Disclaimer: Everything below this line has to be rewritten, I will do this soon...
 
-metafeed=$(awk '{sub(/\$name/,name);sub(/\$today/,today);sub(/\$description/,description);sub(/\$link/,link);}1' name="$name" today="$(date)" description="$description" link="$link" templates/feed.xml)
+todayrss="$(date -R)"
+
+metafeed=$(awk '{sub(/\$name/,name);sub(/\$todayrss/,todayrss);sub(/\$description/,description);sub(/\$link/,link);}1' name="$name" todayrss="$todayrss" description="$description" link="$link" templates/feed.xml)
 
 header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,description);sub(/\$twitter/,twitter);sub(/\$author/,author);sub(/\$linkcss/,linkcss);sub(/\$linkicon/,linkicon);sub(/\$linkarchives/,linkarchives);sub(/\$linkfeed/,linkfeed);}1' name="$name" github="$github" description="$description" twitter="$twitter" author="$author" linkcss="$link/style.css" linkicon="$link/images/favicon.png" linkarchives="$link/archives.html" linkfeed="$link/feed.xml" templates/header.html)
 
@@ -50,8 +52,7 @@ do
 	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
 	postlink="/archives/$postdate/$filename"
 	rssdate="$(sed -n 2p $filename)"
-	rssdate="$(echo $rssdate | sed 's#^\([0-9\-]\{5\}\)-\([0-9]\{2\}\)#\2-\1#')"
-	rssdate="$(date --date="$rssdate")"
+	rssdate="$(date -d "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<<"$rssdate")" +"%a, %d %b %Y %H:%M:%S %z")"
 	headline="<h1><a href="\".$postlink\"">$(sed -n 1p $filename)</a></h1>"
 	h3="<h3>$postdate</h3>"
 	article="$headline $h3 $(sed -n '4,$p' $filename)"
