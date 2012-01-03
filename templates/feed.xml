@@ -5,4 +5,4 @@
   <description>$description</description>
   <link>$link</link>
   <lastBuildDate>$todayrss</lastBuildDate>
-  <pubDate>$today</pubDate>
+  <pubDate>$todayrss</pubDate>
