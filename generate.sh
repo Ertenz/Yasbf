@@ -11,7 +11,7 @@ name="" #Insert the name of your site here
 description="" #Insert a description of your site here
 twitter="" #Insert your twitter username here
 github="" #Insert your github username here
-link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
+link="" #Link to your Yasbf instance WITHOUT AN END SLASH!
 echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
 
 #########################
@@ -46,6 +46,34 @@ do
 	index="${index}${customdate},${file}\n"
 done
 
+#This loop generates the archive.html
+for key in `echo -e ${index} | sort -r`
+do
+	filename="$(echo "$key" | sed 's/.*,//')"
+	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
+	postlink="/archives/$postdate/$filename"
+	if [ ! -d "../archives/$postdate" ]; then
+		mkdir "../archives/$postdate"
+	fi
+	archivesraw="<li><a href="\".$postlink\"">$postdate - $(sed -n 1p $filename)</a></li>"
+	echo "$header <article>$article</article> $footer" | tr '\r' ' ' >> "../archives/$postdate/$filename"
+	echo $archivesraw | tr '\r' ' ' >> ../archivesraw.html
+done
+
+#This loop generates the index.html
+for key in `echo -e ${index} | sort -r`
+do
+	filename="$(echo "$key" | sed 's/.*,//')"
+	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
+	postlink="/archives/$postdate/$filename"
+	headline="<h1><a href="\".$postlink\"">$(sed -n 1p $filename)</a></h1>"
+	h3="<h3>$postdate</h3>"
+	article="$headline $h3 $(sed -n '4,$p' $filename)"
+	echo $article | tr '\r' ' ' >> ../article.html
+	test $((++loop1)) -ge 5 && break
+done
+
+#This loop generates the rss feed
 for key in `echo -e ${index} | sort -r`
 do
 	filename="$(echo "$key" | sed 's/.*,//')"
@@ -53,19 +81,11 @@ do
 	postlink="/archives/$postdate/$filename"
 	rssdate="$(sed -n 2p $filename)"
 	rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<<"$rssdate")")"
-	headline="<h1><a href="\".$postlink\"">$(sed -n 1p $filename)</a></h1>"
-	h3="<h3>$postdate</h3>"
-	article="$headline $h3 $(sed -n '4,$p' $filename)"
 	itemfeed="<item><title>$(sed -n 1p $filename)</title><pubDate>$rssdate</pubDate><description><![CDATA[$(sed -n '4,$p' $filename)]]></description><link>$link$postlink</link><guid>$link$postlink</guid></item>"
-	if [ ! -d "../archives/$postdate" ]; then
-		mkdir "../archives/$postdate"
-	fi
-	archivesraw="<li><a href="\".$postlink\"">$postdate - $(sed -n 1p $filename)</a></li>"
-	echo "$header <article>$article</article> $footer" | tr '\r' ' ' >> "../archives/$postdate/$filename"
-	echo $article | tr '\r' ' ' >> ../article.html
 	echo $itemfeed | tr '\r' ' ' >> ../itemfeed.xml
-	echo $archivesraw | tr '\r' ' ' >> ../archivesraw.html
+	test $((++loop2)) -ge 15 && break
 done
+#Yeah I know it's stupid to split this up into three loops because it's possible to do it with one loop <- very first item on to do list
 cd ..
 
 article=$(cat article.html)
