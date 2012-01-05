@@ -47,7 +47,6 @@ To-Do
 - It should only generate files which have changed
 - Polished design
 - Optimized code
-- New [favicon](https://github.com/Poapfel/Yasbf/blob/master/images/favicon.png)
 - and more...
 
 --------
