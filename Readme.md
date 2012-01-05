@@ -44,7 +44,6 @@ To-Do
 --------
 
 - Disqus comments (?)
-- The index file shouldn't contain all blog posts
 - It should only generate files which have changed
 - Polished design
 - Optimized code
