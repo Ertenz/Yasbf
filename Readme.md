@@ -43,8 +43,9 @@ See [LICENSE.txt](https://github.com/Poapfel/Yasbf/blob/master/LICENSE.txt).
 To-Do
 --------
 
-- Disqus comments (?)
 - It should only generate files which have changed
+- Podcast support
+- Disqus Comments (?)
 - Polished design
 - Optimized code
 - and more...
