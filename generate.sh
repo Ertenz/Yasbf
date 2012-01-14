@@ -9,8 +9,6 @@
 author="" #Insert your name here
 name="" #Insert the name of your site here
 description="" #Insert a description of your site here
-twitter="" #Insert your twitter username here
-github="" #Insert your github username here
 link="" #Link to your Yasbf instance WITHOUT AN END SLASH!
 echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
 
@@ -24,7 +22,7 @@ echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line i
 
 metafeed=$(awk '{sub(/\$name/,name);sub(/\$todayrss/,todayrss);sub(/\$description/,description);sub(/\$link/,link);}1' name="$name" todayrss="$(date -R)" description="$description" link="$link" templates/feed.xml)
 
-header=$(awk '{sub(/\$name/,name);sub(/\$github/,github);sub(/\$description/,description);sub(/\$twitter/,twitter);sub(/\$author/,author);sub(/\$linkcss/,linkcss);sub(/\$linkicon/,linkicon);sub(/\$linkarchives/,linkarchives);sub(/\$linkfeed/,linkfeed);}1' name="$name" github="$github" description="$description" twitter="$twitter" author="$author" linkcss="$link/style.css" linkicon="$link/images/favicon.png" linkarchives="$link/archives.html" linkfeed="$link/feed.xml" templates/header.html)
+header=$(awk '{sub(/\$name/,name);sub(/\$description/,description);sub(/\$author/,author);sub(/\$linkcss/,linkcss);sub(/\$linkicon/,linkicon);sub(/\$linkarchives/,linkarchives);sub(/\$linkfeed/,linkfeed);}1' name="$name" description="$description" author="$author" linkcss="$link/style.css" linkicon="$link/images/favicon.png" linkarchives="$link/archives.html" linkfeed="$link/feed.xml" templates/header.html)
 
 footer=$(awk '{sub(/\$author/,author);sub(/\$year/,year);}1' author="$author" year="$(date +%Y)" templates/footer.html)
 
