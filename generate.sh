@@ -9,7 +9,7 @@
 author="" #Insert your name here
 name="" #Insert the name of your site here
 description="" #Insert a description of your site here
-link="" #Link to your Yasbf instance WITHOUT AN END SLASH!
+link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
 echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
 
 #########################
@@ -20,9 +20,13 @@ echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line i
 
 #Disclaimer: Everything below this line has to be rewritten, I will do this soon...
 
+if [ "$(echo "$link" | sed -e "s/^.*\(.\)$/\1/")" = "/" ]; then
+	link=$(echo "${link%?}")
+fi
+
 metafeed=$(awk '{sub(/\$name/,name);sub(/\$todayrss/,todayrss);sub(/\$description/,description);sub(/\$link/,link);}1' name="$name" todayrss="$(date -R)" description="$description" link="$link" templates/feed.xml)
 
-header=$(awk '{sub(/\$name/,name);sub(/\$description/,description);sub(/\$author/,author);sub(/\$linkcss/,linkcss);sub(/\$linkicon/,linkicon);sub(/\$linkarchives/,linkarchives);sub(/\$linkfeed/,linkfeed);sub(/\$linkindex/,linkindex);}1' name="$name" description="$description" author="$author" linkcss="$link/templates/style.css" linkicon="$link/images/favicon.png" linkarchives="$link/archives.html" linkfeed="$link/feed.xml" linkindex="$link/index.html" templates/header.html)
+header=$(awk '{sub(/\$name/,name);sub(/\$description/,description);sub(/\$author/,author);sub(/\$linkcss/,linkcss);sub(/\$linkicon/,linkicon);sub(/\$linkarchives/,linkarchives);sub(/\$linkfeed/,linkfeed);sub(/\$linkindex/,linkindex);}1' name="$name" description="$description" author="$author" linkcss="$link/style.css" linkicon="$link/images/favicon.png" linkarchives="$link/archives.html" linkfeed="$link/feed.xml" linkindex="$link/index.html" templates/header.html)
 
 footer=$(awk '{sub(/\$author/,author);sub(/\$year/,year);}1' author="$author" year="$(date +%Y)" templates/footer.html)
 
@@ -42,7 +46,7 @@ do
 	index="${index}${customdate},${file}\n"
 done
 
-#This loop generates the archive.html
+#This loop generates the archive and blog posts
 for key in `echo -e ${index} | sort -r`
 do
 	filename="$(echo "$key" | sed 's/.*,//')"
@@ -51,7 +55,7 @@ do
 	if [ ! -d "../archives/$postdate" ]; then
 		mkdir "../archives/$postdate"
 	fi
-	archivesraw="<li><a href="\".$postlink\"">$postdate - $(sed -n 1p $filename)</a></li>"
+	archivesraw="<li><span>$postdate</span> » <a href="\".$postlink\"">$(sed -n 1p $filename)</a></li>"
 	echo "$header <article>$article</article> $footer" | tr '\r' ' ' >> "../archives/$postdate/$filename"
 	echo $archivesraw | tr '\r' ' ' >> ../archivesraw.html
 done
@@ -110,7 +114,7 @@ then
 	rm archives.html
 fi
 
-archives="$header <article><ul id="archives">$(cat archivesraw.html)</ul></article> $footer"
+archives="$header <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$(cat archivesraw.html)</ul></div></article> $footer"
 echo $archives | tr '\r' ' ' >> archives.html
 
 rm archivesraw.html
