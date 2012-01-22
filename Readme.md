@@ -45,9 +45,8 @@ To-Do
 
 - It should only generate files which have changed
 - Podcast support
-- Disqus Comments (?)
-- Polished design
-- Optimized code
+- Disqus Comments ([?](http://mattgemmell.com/2011/11/29/comments-off/))
+- Rewrite code
 - and more...
 
 --------
