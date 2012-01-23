@@ -52,6 +52,9 @@ do
 	filename="$(echo "$key" | sed 's/.*,//')"
 	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
 	postlink="/archives/$postdate/$filename"
+	headline="<h1><a href="\".$postlink\"">$(sed -n 1p $filename)</a></h1>"
+	h3="<h3>$postdate</h3>"
+	article="$headline $h3 $(sed -n '4,$p' $filename)"
 	if [ ! -d "../archives/$postdate" ]; then
 		mkdir "../archives/$postdate"
 	fi
