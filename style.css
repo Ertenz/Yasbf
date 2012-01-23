@@ -31,6 +31,10 @@ nav a.navigation:hover {
 	text-decoration: underline;
 }
 
+article {
+	font-size: 15px;	
+}
+
 article h1 {
 	margin-top: 50px;
 }
@@ -70,11 +74,8 @@ footer {
 	margin-top: 50px;
 	font-size: 12px;
 	border-top: 4px solid #EEE;
+	padding-top: 6px;
 	color: #666666;
-}
-
-footer p {
-	margin-top: 6px;
 }
 
 footer a {
