@@ -1,4 +1,7 @@
+/* This theme is heavily inspired by tom.preston-werner.com */
+
 body {
+	background-color: #f7f7f7;
 	font-family: Helvetica, Arial, sans-serif;
 	line-height: 22px;
 	background-color: #ffffff;
@@ -28,7 +31,6 @@ nav a.navigation {
 nav a.home:hover,
 nav a.navigation:hover {
 	color: #000000;
-	text-decoration: underline;
 }
 
 article {
