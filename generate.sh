@@ -1,26 +1,16 @@
 #!/bin/bash
 
-#########################
-#                       #
-#    Config - Start     #
-#                       #
-#########################
-
-author="" #Insert your name here
-name="" #Insert the name of your site here
-description="" #Insert a description of your site here
-link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
-echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
-
-#########################
-#                       #
-#     Config - End      #
-#                       #
-#########################
+#Read configuration from the config.cfg file
+source config.cfg
 
 #Removes end slash from the url/link (if it has one)
 if [ "$(echo "$link" | sed -e "s/^.*\(.\)$/\1/")" = "/" ]; then
 	link=$(echo "${link%?}")
+fi
+
+#Create archives folder (if it doesn't exist)
+if [ ! -d "archives" ]; then
+	mkdir archives
 fi
 
 #Fill feed template with custom content
@@ -29,11 +19,6 @@ metafeed=$(awk '{sub(/\$name/,name);sub(/\$todayrss/,todayrss);sub(/\$descriptio
 header=$(awk '{sub(/\$name/,name);sub(/\$description/,description);sub(/\$author/,author);sub(/\$linkcss/,linkcss);sub(/\$linkicon/,linkicon);sub(/\$linkarchives/,linkarchives);sub(/\$linkfeed/,linkfeed);sub(/\$linkindex/,linkindex);}1' name="$name" description="$description" author="$author" linkcss="$link/style.css" linkicon="$link/images/favicon.png" linkarchives="$link/archives.html" linkfeed="$link/feed.xml" linkindex="$link" templates/header.html)
 #Fill footer template with custom content
 footer=$(awk '{sub(/\$author/,author);sub(/\$year/,year);}1' author="$author" year="$(date +%Y)" templates/footer.html)
-
-# Create archives folder (if it doesn't exist)
-if [ ! -d "archives" ]; then
-	mkdir archives
-fi
 
 #Sort the files in the folder 'posts' by a custom date which is specified in line 2 of every post
 cd posts
@@ -47,7 +32,6 @@ done
 #Generate ALL the files
 for key in `echo -e ${index} | sort -r`
 do
-
 	#Some basic strings
 	filename="$(echo "$key" | sed 's/.*,//')"
 	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
@@ -78,7 +62,6 @@ do
 		itemfeed="<item><title>$(sed -n 1p $filename)</title><pubDate>$rssdate</pubDate><description><![CDATA[$(sed -n '4,$p' $filename)]]></description><link>$link$postlink</link><guid>$link$postlink</guid></item>"
 		echo $itemfeed >> ../itemfeed.xml
 	fi
-
 done
 cd ..
 
