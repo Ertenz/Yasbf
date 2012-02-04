@@ -1,12 +1,12 @@
 # Yasbf #
 
-Yasbf is a basic blogging engine I wrote.
+Yasbf is a basic blogging framework I wrote.
 
-Its input is simply a directory of html text files, and a basic transformation script automatically renders the blog HTML from them as needed.
+Its input is a directory of html files and a transformation script automatically renders the blog HTML from them.
 
-It’s unsuitable and unnecessary for nearly everyone, but I somehow like it.
+It's probably unnecessary for everyone, but I somehow like it.
 
-You will find a short Documentation in the [Wiki](https://github.com/Poapfel/Yasbf/wiki).
+You will find a short Documentation about Yasbf ib the [Wiki](https://github.com/Poapfel/Yasbf/wiki).
 
 --------
 
