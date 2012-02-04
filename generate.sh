@@ -10,7 +10,7 @@ author="" #Insert your name here
 name="" #Insert the name of your site here
 description="" #Insert a description of your site here
 link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
-#echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
+echo "Y U NO RTFM?" & exit #RTFM protection just uncomment or remove this line if you have configured the lines above
 
 #########################
 #                       #
@@ -18,6 +18,7 @@ link="" #Link to your Yasbf instance for example: http://example.com/Yasbf
 #                       #
 #########################
 
+#Removes end slash from the url/link (if it has one)
 if [ "$(echo "$link" | sed -e "s/^.*\(.\)$/\1/")" = "/" ]; then
 	link=$(echo "${link%?}")
 fi
@@ -42,6 +43,7 @@ do
 	customdate="20${customdate:6:2}${customdate:0:2}${customdate:3:2}.${customdate:9:2}${customdate:12:2}"
 	index="${index}${customdate},${file}\n"
 done
+
 #Generate ALL the files
 for key in `echo -e ${index} | sort -r`
 do
