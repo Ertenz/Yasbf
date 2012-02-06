@@ -87,7 +87,7 @@ footer a {
 }
 
 footer a:hover {
-	text-decoration: underline;
+	color: #000000;
 }
 
 article #archives h1 {
