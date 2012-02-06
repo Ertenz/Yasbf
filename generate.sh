@@ -3,7 +3,7 @@
 #Read configuration from the config.cfg file
 source config.cfg
 
-#Removes end slash from the url/link (if it has one)
+#Remove end slash from the url/link (if it has one)
 if [ "$(echo "$link" | sed -e "s/^.*\(.\)$/\1/")" = "/" ]; then
 	link=$(echo "${link%?}")
 fi
@@ -34,17 +34,17 @@ for key in `echo -e ${index} | sort -r`
 do
 	#Some basic strings
 	filename="$(echo "$key" | sed 's/.*,//')"
+	postheadline="$(sed -n 1p $filename)"
 	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
-	postlink="/archives/$postdate/$filename"
-	headline="<h1><a href="\".$postlink\"">$(sed -n 1p $filename)</a></h1>"
-	h3="<h3>$postdate</h3>"
-	article="$headline $h3 $(sed -n '4,$p' $filename)"
+	postcontent="$(sed -n '4,$p' $filename)"
+	postlink="$link/archives/$postdate/$filename"
+	article="<h1><a href=\"$postlink\">$postheadline</a></h1> <h3>$postdate</h3> $postcontent"
 	
 	#Generate the blog posts and the archive
 	if [ ! -d "../archives/$postdate" ]; then
 		mkdir "../archives/$postdate"
 	fi
-	archivesraw="<li><span>$postdate</span> » <a href="\".$postlink\"">$(sed -n 1p $filename)</a></li>"
+	archivesraw="<li><span>$postdate</span> » <a href=\"$postlink\">$postheadline</a></li>"
 	echo "$header <article>$article</article> $footer" > ../archives/$postdate/$filename
 	echo $archivesraw >> ../archivesraw.html
 
@@ -57,9 +57,8 @@ do
 	#Generate the rss feed
 	let rsscount=rsscount+1
 	if [ $rsscount -le 25 ]; then
-		rssdate="$(sed -n 2p $filename)"
-		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<<"$rssdate")")"
-		itemfeed="<item><title>$(sed -n 1p $filename)</title><pubDate>$rssdate</pubDate><description><![CDATA[$(sed -n '4,$p' $filename)]]></description><link>$link$postlink</link><guid>$link$postlink</guid></item>"
+		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
+		itemfeed="<item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><link>$postlink</link><guid>$postlink</guid></item>"
 		echo $itemfeed >> ../itemfeed.xml
 	fi
 done
