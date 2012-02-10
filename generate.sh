@@ -44,41 +44,32 @@ do
 	if [ ! -d "../archives/$postdate" ]; then
 		mkdir "../archives/$postdate"
 	fi
-	archivesraw="<li><span>$postdate</span> » <a href=\"$postlink\">$postheadline</a></li>"
 	echo "$header <article>$article</article> $footer" > ../archives/$postdate/$filename
-	echo $archivesraw >> ../archivesraw.html
+	archives="$archives <li><span>$postdate</span> » <a href=\"$postlink\">$postheadline</a></li>"
 
 	#Generate the index.html
 	let indexcount=indexcount+1
 	if [ $indexcount -le 5 ]; then
-		echo $article >> ../article.html
+		indexhtml="$indexhtml $article"
 	fi
 
 	#Generate the rss feed
 	let rsscount=rsscount+1
 	if [ $rsscount -le 25 ]; then
 		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
-		itemfeed="<item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><link>$postlink</link><guid>$postlink</guid></item>"
-		echo $itemfeed >> ../itemfeed.xml
+		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><link>$postlink</link><guid>$postlink</guid></item>"
 	fi
 done
 cd ..
 
 #Create index.html
-article=$(cat article.html)
-indexhtml="$header <article>$article</article> $footer"
+indexhtml="$header <article>$indexhtml</article> $footer"
 echo $indexhtml > index.html
 
 #Create feed.xml
-itemfeed=$(cat itemfeed.xml)
-feed="$metafeed $itemfeed </channel></rss>"
+feed="$metafeed $feed </channel></rss>"
 echo $feed > feed.xml
 
 #Create archives.html
-archives="$header <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$(cat archivesraw.html)</ul></div></article> $footer"
+archives="$header <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$archives</ul></div></article> $footer"
 echo $archives > archives.html
-
-#Remove "workaround" files
-rm archivesraw.html
-rm article.html
-rm itemfeed.xml
