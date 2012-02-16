@@ -4,8 +4,8 @@
 source config.cfg
 
 #Remove end slash from the url/link (if it has one)
-if [ "$(echo "$link" | sed -e "s/^.*\(.\)$/\1/")" = "/" ]; then
-	link=$(echo "${link%?}")
+if [ $(echo $link | sed "s/^.*\(.\)$/\1/") = "/" ]; then
+	link=$(echo $link | sed 's/\(.*\)./\1/')
 fi
 
 #Create archives folder (if it doesn't exist)
@@ -14,15 +14,15 @@ if [ ! -d "archives" ]; then
 fi
 
 #Fill feed template with custom content
-metafeed=$(awk '{sub(/\$name/,name);sub(/\$todayrss/,todayrss);sub(/\$description/,description);sub(/\$link/,link);}1' name="$name" todayrss="$(date -R)" description="$description" link="$link" templates/feed.xml)
+feedtemplate=$(sed -e "s/{name}/$name/" -e "s/{todayrss}/$(date -R)/" -e "s/{description}/$description/" -e "s^{link}^$link^" templates/feed.rss)
 #Fill header template with custom content
-header=$(awk '{sub(/\$name/,name);sub(/\$description/,description);sub(/\$author/,author);sub(/\$linkcss/,linkcss);sub(/\$linkicon/,linkicon);sub(/\$linkarchives/,linkarchives);sub(/\$linkfeed/,linkfeed);sub(/\$linkindex/,linkindex);}1' name="$name" description="$description" author="$author" linkcss="$link/style.css" linkicon="$link/images/favicon.png" linkarchives="$link/archives.html" linkfeed="$link/feed.xml" linkindex="$link" templates/header.html)
+headertemplate=$(sed -e "s/{name}/$name/" -e "s/{author}/$author/" -e "s/{description}/$description/" -e "s^{link}^$link^" templates/header.html)
 #Fill footer template with custom content
-footer=$(awk '{sub(/\$author/,author);sub(/\$year/,year);}1' author="$author" year="$(date +%Y)" templates/footer.html)
+footertemplate=$(sed -e "s/{year}/$(date +%Y)/" -e "s/{author}/$author/" templates/footer.html)
 
 #Sort the files in the folder 'posts' by a custom date which is specified in line 2 of every post
 cd posts
-for file in *
+for file in *.html
 do
 	customdate="$(sed -n 2p $file)"
 	customdate="20${customdate:6:2}${customdate:0:2}${customdate:3:2}.${customdate:9:2}${customdate:12:2}"
@@ -44,7 +44,7 @@ do
 	if [ ! -d "../archives/$postdate" ]; then
 		mkdir "../archives/$postdate"
 	fi
-	echo "$header <article>$article</article> $footer" > ../archives/$postdate/$filename
+	echo "$headertemplate <article>$article</article> $footertemplate" > ../archives/$postdate/$filename
 	archives="$archives <li><span>$postdate</span> » <a href=\"$postlink\">$postheadline</a></li>"
 
 	#Generate the index.html
@@ -57,19 +57,19 @@ do
 	let rsscount=rsscount+1
 	if [ $rsscount -le 25 ]; then
 		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
-		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><link>$postlink</link><guid>$postlink</guid></item>"
+		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$(echo $postcontent | sed -e 's/&/&amp;/' -e 's/</&lt;/' -e 's/>/&gt;/' -e 's/"/&quot;/' -e "s/'/&#39;/")]]></description><link>$postlink</link><guid>$postlink</guid></item>"
 	fi
 done
 cd ..
 
 #Create index.html
-indexhtml="$header <article>$indexhtml</article> $footer"
+indexhtml="$headertemplate <article>$indexhtml</article> $footertemplate"
 echo $indexhtml > index.html
 
-#Create feed.xml
-feed="$metafeed $feed </channel></rss>"
-echo $feed > feed.xml
+#Create feed.rss
+feed="$feedtemplate $feed </channel></rss>"
+echo $feed > feed.rss
 
 #Create archives.html
-archives="$header <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$archives</ul></div></article> $footer"
+archives="$headertemplate <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$archives</ul></div></article> $footer"
 echo $archives > archives.html
