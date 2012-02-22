@@ -1,8 +1,8 @@
-/* This theme is heavily inspired by tom.preston-werner.com */
+/* This is the css of the default Yasbf theme and it is heavily inspired by tom.preston-werner.com */
 
 body {
 	background-color: #f7f7f7;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: sans-serif;
 	line-height: 22px;
 	background-color: #ffffff;
 	margin-left: 27.5%;
@@ -34,11 +34,11 @@ nav a.navigation:hover {
 }
 
 article {
-	font-size: 15px;	
+	font-size: 15px;
 }
 
 article h1 {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
 article h1 a {
@@ -48,7 +48,9 @@ article h1 a {
 }
 
 article h1 a:hover {
+	color: #000000;
 	text-decoration: underline;
+    background: none;
 }
 
 article h3 {
@@ -60,22 +62,23 @@ article h3 {
 }
 
 article a {
-	color: #444444;
+    color: #000000;
+    text-decoration: underline;
 }
 
 article a:hover {
-	color: #aa0000;
+    color: #737373;
 }
 
 article blockquote {
-	border-left: 4px solid #EEE;
+	border-left: 4px solid #eeeeee;
 	padding-left: 10px;
 }
 
 footer {
 	margin-top: 50px;
 	font-size: 12px;
-	border-top: 4px solid #EEE;
+	border-top: 4px solid #eeeeee;
 	padding-top: 6px;
 	color: #666666;
 }

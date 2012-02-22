@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
-  <title>{name}</title>
+  <title>{title}</title>
   <description>{description}</description>
-  <link>{link}</link>
+  <link>{url}</link>
   <lastBuildDate>{todayrss}</lastBuildDate>
   <pubDate>{todayrss}</pubDate>

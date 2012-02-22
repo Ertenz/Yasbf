@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{name}</title>
+	<title>{title}</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<meta name="robots" content="index, follow" />
 	<meta name="author" content="{author}" />
 	<meta name="description" content="{description}" />
-	<meta name="generator" content="Yasbf" />
-	<link rel="shortcut icon" href="{link}/images/favicon.png" />
-	<link rel="stylesheet" type="text/css" href="{link}/style.css" />
-	<link rel="alternate" type="application/rss+xml" title="RSS" href="{link}/feed.rss" />
+    <meta name="generator" content="Yasbf" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1" />
+	<link rel="shortcut icon" href="{url}/images/favicon.png" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{url}/feed.rss" />
+    <link rel="stylesheet" type="text/css" href="{url}/style.css" />
+    <style type="text/css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)">
+        body {
+            margin-left: 17.5px;
+            margin-right: 17.5px;
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-	<a class="home" href="{link}">{name}</a>
-	<a class="navigation" href="{link}/archives.html">Archives</a> 
-	<a class="navigation" href="{link}/feed.rss">Feed</a>
+	<a class="home" href="{url}">{title}</a>
+	<a class="navigation" href="{url}/archives.html">Archives</a> 
+	<a class="navigation" href="{url}/feed.rss">Feed</a>
 </nav>

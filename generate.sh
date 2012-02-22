@@ -4,8 +4,8 @@
 source config.cfg
 
 #Remove end slash from the url/link (if it has one)
-if [ $(echo $link | sed "s/^.*\(.\)$/\1/") = "/" ]; then
-	link=$(echo $link | sed 's/\(.*\)./\1/')
+if [ $(echo $url | sed "s/^.*\(.\)$/\1/") == "/" ]; then
+	url=$(echo $url | sed 's/\(.*\)./\1/')
 fi
 
 #Create archives folder (if it doesn't exist)
@@ -14,9 +14,9 @@ if [ ! -d "archives" ]; then
 fi
 
 #Fill feed template with custom content
-feedtemplate=$(sed -e "s/{name}/$name/" -e "s/{todayrss}/$(date -R)/" -e "s/{description}/$description/" -e "s^{link}^$link^" templates/feed.rss)
+feedtemplate=$(sed -e "s/{title}/$title/" -e "s/{todayrss}/$(date -R)/" -e "s/{description}/$description/" -e "s^{url}^$url^" templates/feed.rss)
 #Fill header template with custom content
-headertemplate=$(sed -e "s/{name}/$name/" -e "s/{author}/$author/" -e "s/{description}/$description/" -e "s^{link}^$link^" templates/header.html)
+headertemplate=$(sed -e "s/{title}/$title/" -e "s/{author}/$author/" -e "s/{description}/$description/" -e "s^{url}^$url^" templates/header.html)
 #Fill footer template with custom content
 footertemplate=$(sed -e "s/{year}/$(date +%Y)/" -e "s/{author}/$author/" templates/footer.html)
 
@@ -37,7 +37,7 @@ do
 	postheadline="$(sed -n 1p $filename)"
 	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
 	postcontent="$(sed -n '4,$p' $filename)"
-	postlink="$link/archives/$postdate/$filename"
+	postlink="$url/archives/$postdate/$filename"
 	article="<h1><a href=\"$postlink\">$postheadline</a></h1> <h3>$postdate</h3> $postcontent"
 	
 	#Generate the blog posts and the archive
@@ -57,7 +57,7 @@ do
 	let rsscount=rsscount+1
 	if [ $rsscount -le 25 ]; then
 		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
-		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$(echo $postcontent | sed -e 's/&/&amp;/' -e 's/</&lt;/' -e 's/>/&gt;/' -e 's/"/&quot;/' -e "s/'/&#39;/")]]></description><link>$postlink</link><guid>$postlink</guid></item>"
+		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$(echo $postcontent | sed -e 's/&/&amp;/' -e 's/</&lt;/' -e 's/>/&gt;/' -e 's/\"/&quot;/' -e "s/\'/&#39;/")]]></description><link>$postlink</link><guid>$postlink</guid></item>"
 	fi
 done
 cd ..
