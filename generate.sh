@@ -49,15 +49,16 @@ do
 
 	#Generate the index.html
 	let indexcount=indexcount+1
-	if [ $indexcount -le 5 ]; then
+	if [ $indexcount -le $posts_on_blog_index ]; then
 		indexhtml="$indexhtml $article"
 	fi
 
 	#Generate the rss feed
 	let rsscount=rsscount+1
-	if [ $rsscount -le 25 ]; then
+	if [ $rsscount -le $amount_of_rss_items ]; then
 		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
-		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$(echo $postcontent | sed -e 's/&/&amp;/' -e 's/</&lt;/' -e 's/>/&gt;/' -e 's/\"/&quot;/' -e "s/\'/&#39;/")]]></description><link>$postlink</link><guid>$postlink</guid></item>"
+		postcontent="$(echo $postcontent | sed -e 's/&/&amp;/' -e 's/</&lt;/' -e 's/>/&gt;/' -e 's/\"/&quot;/' -e "s/\'/&#39;/")"
+		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><link>$postlink</link><guid>$postlink</guid></item>"
 	fi
 done
 cd ..
