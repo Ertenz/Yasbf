@@ -29,7 +29,7 @@ do
 	index="${index}${customdate},${file}\n"
 done
 
-#Generate ALL the files
+#Generate ALL the posts
 for key in `echo -e ${index} | sort -r`
 do
 	#Some basic strings
