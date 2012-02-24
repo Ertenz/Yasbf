@@ -1,6 +1,11 @@
 #!/bin/bash
 
+#Print current date and time
+echo "--"$(date +"%Y-%m-%d %T")"--"
+echo "Yasbf has been started."
+
 #Read configuration from the config.cfg file
+echo "Reading configuration file..."
 source config.cfg
 
 #Remove end slash from the url/link (if it has one)
@@ -30,6 +35,7 @@ do
 done
 
 #Generate ALL the posts
+echo "Generating ALL the posts..."
 for key in `echo -e ${index} | sort -r`
 do
 	#Some basic strings
@@ -64,13 +70,21 @@ done
 cd ..
 
 #Create index.html
+echo "Creating blog index..."
 indexhtml="$headertemplate <article>$indexhtml</article> $footertemplate"
 echo $indexhtml > index.html
 
 #Create feed.rss
+echo "Creating rss feed..."
 feed="$feedtemplate $feed </channel></rss>"
 echo $feed > feed.rss
 
 #Create archives.html
+echo "Creating archives..."
 archives="$headertemplate <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$archives</ul></div></article> $footer"
 echo $archives > archives.html
+
+#Final Message
+echo ""
+echo "100%[======================================]"
+echo "Blog generation was successful."
