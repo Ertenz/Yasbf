@@ -75,6 +75,10 @@ article blockquote {
 	padding-left: 10px;
 }
 
+article audio {
+	margin-top: 15px;	
+}
+
 footer {
 	margin-top: 50px;
 	font-size: 12px;
