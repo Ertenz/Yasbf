@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Print current date and time
+#Print welcome message
 echo "--"$(date +"%Y-%m-%d %T")"--"
 echo "Yasbf has been started."
 
@@ -41,7 +41,7 @@ do
 	#Some basic strings
 	filename="$(echo "$key" | sed 's/.*,//')"
 	postheadline="$(sed -n 1p $filename)"
-	postdate="$(sed -n 2p $filename | cut -d " " -f1)"
+	postdate="$(sed -n '2s/ .*//p' $filename)"
 	postcontent="$(sed -n '4,$p' $filename)"
 	postlink="$url/archives/$postdate/$filename"
 	article="<h1><a href=\"$postlink\">$postheadline</a></h1> <h3>$postdate</h3> $postcontent"
@@ -84,7 +84,7 @@ echo "Creating archives..."
 archives="$headertemplate <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$archives</ul></div></article> $footer"
 echo $archives > archives.html
 
-#Final Message
+#Goodbye message
 echo ""
 echo "100%[======================================]"
 echo "Blog generation was successful."
