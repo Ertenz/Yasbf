@@ -42,9 +42,10 @@ do
 	filename="$(echo "$key" | sed 's/.*,//')"
 	postheadline="$(sed -n 1p $filename)"
 	postdate="$(sed -n '2s/ .*//p' $filename)"
-	postcontent="$(sed -n '4,$p' $filename)"
+	enclosure_url="$(sed -n 3p $filename)"
+	postcontent="$(sed -n '5,$p' $filename)"
 	postlink="$url/archives/$postdate/$filename"
-	article="<h1><a href=\"$postlink\">$postheadline</a></h1> <h3>$postdate</h3> $postcontent"
+	article="<h1><a href=\"$postlink\">$postheadline</a></h1> <h3>$postdate</h3> $postcontent <audio controls=\"controls\"><source src="$enclosure_url" type="audio/mp3" /></audio>"
 	
 	#Generate the blog posts and the archive
 	if [ ! -d "../archives/$postdate" ]; then
@@ -64,7 +65,7 @@ do
 	if [ $rsscount -le $amount_of_rss_items ]; then
 		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
 		postcontent="$(echo $postcontent | sed -e 's/&/&amp;/' -e 's/</&lt;/' -e 's/>/&gt;/' -e 's/\"/&quot;/' -e "s/\'/&#39;/")"
-		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><link>$postlink</link><guid>$postlink</guid></item>"
+		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><enclosure url=\"$enclosure_url\" length=\"\" type=\"audio/mpeg\"/></item>"
 	fi
 done
 cd ..
