@@ -75,7 +75,7 @@ do
 		if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
 			feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><enclosure url=\"$enclosure_url\" length=\"\" type=\"audio/mpeg\"/></item>"
 		else
-			feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><link>$postlink</link></item>"
+			feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><link>$postlink</link><itunes:block>yes</itunes:block></item>"
 		fi
 	fi
 done
