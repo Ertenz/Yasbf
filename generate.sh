@@ -19,7 +19,7 @@ if [ ! -d "archives" ]; then
 fi
 
 #Fill feed template with custom content
-feedtemplate=$(sed -e "s/{title}/$title/" -e "s/{todayrss}/$(date -R)/" -e "s/{description}/$description/" -e "s^{url}^$url^" templates/feed.rss)
+feedtemplate=$(sed -e "s/{title}/$title/" -e "s/{todayrss}/$(date -R)/" -e "s/{description}/$description/" -e "s^{url}^$url^" -e "s/{author}/$author/" -e "s/{itunes_explicit}/$itunes_explicit/" -e "s/{itunes_owner_email}/$itunes_owner_email/" -e "s/{itunes_category}/$itunes_category/" -e "s/{language}/$language/"templates/feed.rss)
 #Fill header template with custom content
 headertemplate=$(sed -e "s/{title}/$title/" -e "s/{author}/$author/" -e "s/{description}/$description/" -e "s^{url}^$url^" templates/header.html)
 #Fill footer template with custom content

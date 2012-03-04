@@ -6,3 +6,13 @@
   <link>{url}</link>
   <lastBuildDate>{todayrss}</lastBuildDate>
   <pubDate>{todayrss}</pubDate>
+  <language>{language}</language>
+  <itunes:author>{author}</itunes:author>
+  <itunes:image href="{url}/images/favicon.png"/>
+  <itunes:explicit>{itunes_explicit}</itunes:explicit>
+  <itunes:owner>
+	<itunes:name>{author}</itunes:name>
+	<itunes:email>{itunes_owner_email}</itunes:email>
+ </itunes:owner>
+ <itunes:summary>{description}</itunes:summary>
+ <itunes:category text="{itunes_category}"/>
