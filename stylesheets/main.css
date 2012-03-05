@@ -1,10 +1,9 @@
 /* This is the css of the default Yasbf theme and it is heavily inspired by tom.preston-werner.com */
 
 body {
-	background-color: #f7f7f7;
+	background-color: #ffffff;
 	font-family: sans-serif;
 	line-height: 22px;
-	background-color: #ffffff;
 	margin-left: 27.5%;
 	margin-right: 27.5%;
 }
