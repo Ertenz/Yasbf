@@ -19,11 +19,11 @@ if [ ! -d "archives" ]; then
 fi
 
 #Fill feed template with custom content
-feedtemplate=$(sed -e "s/{title}/$title/" -e "s/{todayrss}/$(date -R)/" -e "s/{description}/$description/" -e "s^{url}^$url^" -e "s/{author}/$author/" -e "s/{itunes_explicit}/$itunes_explicit/" -e "s/{itunes_owner_email}/$itunes_owner_email/" -e "s/{itunes_category}/$itunes_category/" -e "s/{language}/$language/"templates/feed.rss)
+feedtemplate=$(sed -e "s^{title}^$title^" -e "s^{todayrss}^$(date -R)^" -e "s^{description}^$description^" -e "s^{url}^$url^" -e "s^{author}^$author^" -e "s^{itunes_explicit}^$itunes_explicit^" -e "s^{itunes_owner_email}^$itunes_owner_email^" -e "s^{itunes_category}^$itunes_category^" -e "s^{language}^$language^" templates/feed.rss)
 #Fill header template with custom content
-headertemplate=$(sed -e "s/{title}/$title/" -e "s/{author}/$author/" -e "s/{description}/$description/" -e "s^{url}^$url^" templates/header.html)
+headertemplate=$(sed -e "s^{title}^$title^" -e "s^{author}^$author^" -e "s^{description}^$description^" -e "s^{url}^$url^" templates/header.html)
 #Fill footer template with custom content
-footertemplate=$(sed -e "s/{year}/$(date +%Y)/" -e "s/{author}/$author/" templates/footer.html)
+footertemplate=$(sed -e "s^{year}^$(date +%Y)^" -e "s^{author}^$author^" templates/footer.html)
 
 #Sort the files in the folder 'posts' by a custom date which is specified in line 2 of every post
 cd posts
@@ -45,7 +45,7 @@ do
 	enclosure_url="$(sed -n 3p $filename)"
 	postcontent="$(sed -n '5,$p' $filename)"
 	postlink="$url/archives/$postdate/$filename"
-	if [ $flattr_id != "" ]; then
+	if [$flattr_id != ""]; then
 		flattr="<br/><a href=\"https://flattr.com/submit/auto?user_id=$flattr_id&url=$postlink&title=$postheadline&language=$flattr_lang&category=$flattr_category\"><img src=\"http://api.flattr.com/button/flattr-badge-large.png\" class=\"flattrbutton\" /></a>"
 	fi
 	if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
