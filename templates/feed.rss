@@ -8,11 +8,12 @@
   <pubDate>{todayrss}</pubDate>
   <language>{language}</language>
   <itunes:author>{author}</itunes:author>
-  <itunes:image href="{url}/images/favicon.png"/>
+  <itunes:image href="{itunes_image}" />
   <itunes:explicit>{itunes_explicit}</itunes:explicit>
   <itunes:owner>
 	<itunes:name>{author}</itunes:name>
 	<itunes:email>{itunes_owner_email}</itunes:email>
  </itunes:owner>
  <itunes:summary>{description}</itunes:summary>
- <itunes:category text="{itunes_category}"/>
+ <itunes:category text="{itunes_category}" />
+ <copyright>Copyright {year} {author}</copyright>
