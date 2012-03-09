@@ -45,7 +45,8 @@ do
 	enclosure_url="$(sed -n 3p $filename)"
 	postcontent="$(sed -n '5,$p' $filename)"
 	postlink="$url/archives/$postdate/$filename"
-	if [$flattr_id != ""]; then
+	if [ $flattr_id != "" ]
+	then
 		flattr="<br/><a href=\"https://flattr.com/submit/auto?user_id=$flattr_id&url=$postlink&title=$postheadline&language=$flattr_lang&category=$flattr_category\"><img src=\"http://api.flattr.com/button/flattr-badge-large.png\" class=\"flattrbutton\" /></a>"
 	fi
 	if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
