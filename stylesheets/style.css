@@ -1,7 +1,6 @@
 /* This is the css of the default Yasbf theme and it is heavily inspired by tom.preston-werner.com */
 
 body {
-	background-color: #f7f7f7;
 	font-family: sans-serif;
 	line-height: 22px;
 	background-color: #ffffff;
@@ -77,6 +76,14 @@ article blockquote {
 
 article audio {
 	margin-top: 15px;	
+}
+
+article img {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
 }
 
 article img.flattrbutton {
