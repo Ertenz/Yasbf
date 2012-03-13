@@ -16,3 +16,4 @@
  </itunes:owner>
  <itunes:summary>{description}</itunes:summary>
  <itunes:category text="{itunes_category}" />
+ <copyright>Copyright {year} {author}</copyright>
