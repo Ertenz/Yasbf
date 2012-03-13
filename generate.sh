@@ -45,7 +45,7 @@ do
 	enclosure_url="$(sed -n 3p $filename)"
 	postcontent="$(sed -n '5,$p' $filename)"
 	postlink="$url/archives/$postdate/$filename"
-	if [$flattr_id != ""]
+	if [ $flattr_id != "" ]
 	then
 		flattr="<br/><a href=\"https://flattr.com/submit/auto?user_id=$flattr_id&url=$postlink&title=$postheadline&language=$flattr_lang&category=$flattr_category\"><img src=\"http://api.flattr.com/button/flattr-badge-large.png\" class=\"flattrbutton\" /></a>"
 	fi
@@ -72,7 +72,7 @@ do
 	let rsscount=rsscount+1
 	if [ $rsscount -le $amount_of_rss_items ]; then
 		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
-		#postcontent="$(echo $postcontent | sed -e 's/&/\&amp\;/g' -e 's/</\&lt\;/g' -e 's/>/\&gt\;/g' -e 's/"/\&quot\;/g' -e "s/'/\&#39\;/g")"
+		postcontent="$(echo $postcontent | sed -e 's/&/\&amp\;/g' -e 's/</\&lt\;/g' -e 's/>/\&gt\;/g' -e 's/"/\&quot\;/g' -e "s/'/\&#39\;/g")"
 		if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
 			feed="$feed <item><title>$postheadline</title><itunes:author>$author</itunes:author><itunes:subtitle>$(sed -n '5,$p' $filename | cut -c 1-23)...</itunes:subtitle><itunes:summary>$postcontent</itunes:summary><itunes:image href=\"$itunes_image\" /><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><enclosure url=\"$enclosure_url\" length=\"\" type=\"audio/mpeg\"/></item>"
 		else
