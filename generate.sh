@@ -19,11 +19,11 @@ if [ ! -d "archives" ]; then
 fi
 
 #Fill feed template with custom content
-feedtemplate=$(sed -e "s^{title}^$title^" -e "s^{todayrss}^$(date -R)^" -e "s^{description}^$description^" -e "s^{url}^$url^" -e "s^{author}^$author^" -e "s^{itunes_explicit}^$itunes_explicit^" -e "s^{itunes_owner_email}^$itunes_owner_email^" -e "s^{itunes_category}^$itunes_category^" -e "s^{language}^$language^" -e "s^{author}^$author^" -e "s^{itunes_image}^$itunes_image^" templates/feed.rss)
+feedtemplate=$(sed -e "s^{title}^$title^g" -e "s^{todayrss}^$(date -R)^g" -e "s^{description}^$description^g" -e "s^{url}^$url^g" -e "s^{author}^$author^g" -e "s^{itunes_explicit}^$itunes_explicit^g" -e "s^{itunes_owner_email}^$itunes_owner_email^g" -e "s^{itunes_category}^$itunes_category^g" -e "s^{language}^$language^g" -e "s^{author}^$author^g" -e "s^{itunes_image}^$itunes_image^g" templates/feed.rss)
 #Fill header template with custom content
-headertemplate=$(sed -e "s^{title}^$title^" -e "s^{author}^$author^" -e "s^{description}^$description^" -e "s^{url}^$url^" templates/header.html)
+headertemplate=$(sed -e "s^{title}^$title^g" -e "s^{author}^$author^g" -e "s^{description}^$description^g" -e "s^{url}^$url^g" templates/header.html)
 #Fill footer template with custom content
-footertemplate=$(sed -e "s^{year}^$(date +%Y)^" -e "s^{author}^$author^" templates/footer.html)
+footertemplate=$(sed -e "s^{year}^$(date +%Y)^g" -e "s^{author}^$author^g" templates/footer.html)
 
 #Sort the files in the folder 'posts' by a custom date which is specified in line 2 of every post
 cd posts
@@ -74,7 +74,7 @@ do
 		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
 		postcontent="$(echo $postcontent | sed -e 's/&/\&amp\;/g' -e 's/</\&lt\;/g' -e 's/>/\&gt\;/g' -e 's/"/\&quot\;/g' -e "s/'/\&#39\;/g")"
 		if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
-			feed="$feed <item><title>$postheadline</title><itunes:author>$author</itunes:author><itunes:subtitle>$(sed -n '5,$p' $filename | cut -c 1-23)...</itunes:subtitle><itunes:summary>$postcontent</itunes:summary><itunes:image href=\"$itunes_image\" /><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><enclosure url=\"$enclosure_url\" length=\"\" type=\"audio/mpeg\"/></item>"
+			feed="$feed <item><title>$postheadline</title><itunes:author>$author</itunes:author><itunes:subtitle>$(echo $postcontent | cut -c 1-23)...</itunes:subtitle><itunes:summary>$(echo $postcontent | cut -c 1-23)...</itunes:summary><itunes:image href=\"$itunes_image\" /><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><enclosure url=\"$enclosure_url\" length=\"\" type=\"audio/mpeg\"/></item>"
 		else
 			feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><link>$postlink</link><itunes:block>yes</itunes:block></item>"
 		fi
