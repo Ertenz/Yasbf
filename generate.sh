@@ -47,7 +47,8 @@ do
 	postlink="$url/archives/$postdate/$filename"
 	if [ $flattr_id != "" ]
 	then
-		flattr_link="https://flattr.com/submit/auto?user_id=$flattr_id&url=$postlink&title=$postheadline&language=$flattr_lang&category=$flattr_category"
+		flattr_postheadline="$(echo "$postheadline" | sed 's/ /%20/g')"
+		flattr_link="https://flattr.com/submit/auto?user_id=$flattr_id&url=$postlink&title=$flattr_postheadline&language=$flattr_lang&category=$flattr_category"
 		flattr="<br/><a href=\"$flattr_link\"><img src=\"http://api.flattr.com/button/flattr-badge-large.png\" class=\"flattrbutton\" /></a>"
 	fi
 	if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
