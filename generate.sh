@@ -19,7 +19,7 @@ if [ ! -d "archives" ]; then
 fi
 
 #Fill feed template with custom content
-feedtemplate=$(sed -e "s^{title}^$title^g" -e "s^{todayrss}^$(date -R)^g" -e "s^{description}^$description^g" -e "s^{url}^$url^g" -e "s^{author}^$author^g" -e "s^{itunes_explicit}^$itunes_explicit^g" -e "s^{itunes_owner_email}^$itunes_owner_email^g" -e "s^{itunes_category}^$itunes_category^g" -e "s^{language}^$language^g" -e "s^{author}^$author^g" -e "s^{itunes_image}^$itunes_image^g" templates/feed.rss)
+feedtemplate=$(sed -e "s^{title}^$title^g" -e "s^{todayrss}^$(date -R)^g" -e "s^{description}^$description^g" -e "s^{url}^$url^g" -e "s^{author}^$author^g" -e "s^{itunes_explicit}^$itunes_explicit^g" -e "s^{itunes_owner_email}^$itunes_owner_email^g" -e "s^{itunes_category}^$itunes_category^g" -e "s^{language}^$language^g" -e "s^{author}^$author^g" -e "s^{itunes_image}^$itunes_image^g" -e "s^{year}^$(date +%Y)^g" templates/feed.rss)
 #Fill header template with custom content
 headertemplate=$(sed -e "s^{title}^$title^g" -e "s^{author}^$author^g" -e "s^{description}^$description^g" -e "s^{url}^$url^g" templates/header.html)
 #Fill footer template with custom content
@@ -47,7 +47,8 @@ do
 	postlink="$url/archives/$postdate/$filename"
 	if [ $flattr_id != "" ]
 	then
-		flattr="<br/><a href=\"https://flattr.com/submit/auto?user_id=$flattr_id&url=$postlink&title=$postheadline&language=$flattr_lang&category=$flattr_category\"><img src=\"http://api.flattr.com/button/flattr-badge-large.png\" class=\"flattrbutton\" /></a>"
+		flattr_link="https://flattr.com/submit/auto?user_id=$flattr_id&url=$postlink&title=$postheadline&language=$flattr_lang&category=$flattr_category"
+		flattr="<br/><a href=\"$flattr_link\"><img src=\"http://api.flattr.com/button/flattr-badge-large.png\" class=\"flattrbutton\" /></a>"
 	fi
 	if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
 		article="<h1><a href=\"$postlink\">$postheadline</a></h1> <h3>$postdate</h3> $postcontent <audio controls=\"controls\"><source src="$enclosure_url" type="audio/mp3" /></audio> <br/> <a href=\"$enclosure_url\"><img src=\"$url/images/audio_mp3_button.png\"></a> $flattr"
