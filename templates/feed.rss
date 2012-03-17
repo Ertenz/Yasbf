@@ -4,6 +4,7 @@
   <title>{title}</title>
   <description>{description}</description>
   <link>{url}</link>
+  <atom:link href="{url}" rel="self" type="application/rss+xml" />
   <lastBuildDate>{todayrss}</lastBuildDate>
   <pubDate>{todayrss}</pubDate>
   <language>{language}</language>
