@@ -82,6 +82,14 @@ article img {
 	height: auto;
 }
 
+article pre {
+	padding: 5% 5% 5% 5%;
+	background-color: #F3F3F3;
+	border-bottom: 1.5px solid #CCC;
+	font-family: DroidSansMono;
+	overflow: auto;
+}
+
 footer {
 	margin-top: 50px;
 	font-size: 12px;
