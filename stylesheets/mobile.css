@@ -1,8 +1,6 @@
 body {
 	margin-left: 17.5px;
 	margin-right: 17.5px;
-}
-
-nav {
+	width: auto;
 	margin-top: 25px;
 }
