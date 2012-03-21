@@ -19,11 +19,11 @@ if [ ! -d "archives" ]; then
 fi
 
 #Fill feed template with custom content
-feedtemplate=$(sed -e "s/{title}/$title/" -e "s/{todayrss}/$(date -R)/" -e "s/{description}/$description/" -e "s^{url}^$url^" templates/feed.rss)
+feedtemplate=$(sed -e "s/{title}/$title/g" -e "s/{todayrss}/$(date -R)/g" -e "s/{description}/$description/g" -e "s^{url}^$url^g" templates/feed.rss)
 #Fill header template with custom content
-headertemplate=$(sed -e "s/{title}/$title/" -e "s/{author}/$author/" -e "s/{description}/$description/" -e "s^{url}^$url^" templates/header.html)
+headertemplate=$(sed -e "s/{title}/$title/g" -e "s/{author}/$author/g" -e "s/{description}/$description/g" -e "s^{url}^$url^g" templates/header.html)
 #Fill footer template with custom content
-footertemplate=$(sed -e "s/{year}/$(date +%Y)/" -e "s/{author}/$author/" templates/footer.html)
+footertemplate=$(sed -e "s/{year}/$(date +%Y)/g" -e "s/{author}/$author/g" templates/footer.html)
 
 #Sort the files in the folder 'posts' by a custom date which is specified in line 2 of every post
 cd posts
