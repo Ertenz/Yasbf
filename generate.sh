@@ -9,7 +9,7 @@ echo "Reading configuration file..."
 source config.cfg
 
 #Remove end slash from the url/link (if it has one)
-if [ $(echo $url | sed "s/^.*\(.\)$/\1/") == "/" ]; then
+if [ $(echo $url | sed "s/^.*\(.\)$/\1/") = "/" ]; then
 	url=$(echo $url | sed 's/\(.*\)./\1/')
 fi
 
