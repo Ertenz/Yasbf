@@ -31,7 +31,9 @@ for file in *.html
 do
 	customdate="$(sed -n 2p $file)"
 	customdate="20${customdate:6:2}${customdate:0:2}${customdate:3:2}.${customdate:9:2}${customdate:12:2}"
-	index="${index}${customdate},${file}\n"
+	if [ $(echo $customdate | sed 's/\.//') -le $(date +%Y%m%d%H%M) ]; then
+		index="${index}${customdate},${file}\n"
+	fi
 done
 
 #Generate ALL the posts
