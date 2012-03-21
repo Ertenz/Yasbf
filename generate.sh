@@ -64,8 +64,8 @@ do
 	#Generate the rss feed
 	let rsscount=rsscount+1
 	if [ $rsscount -le $amount_of_rss_items ]; then
-		rssdate="$(date -Rd "$(awk -F'[- ]' '{printf("20%s-%s-%s %s\n", $3,$1,$2,$4)}' <<< "$(sed -n 2p $filename)")")"
-		#postcontent="$(echo $postcontent | sed -e 's/&/\&amp\;/g' -e 's/</\&lt\;/g' -e 's/>/\&gt\;/g' -e 's/"/\&quot\;/g' -e "s/'/\&#39\;/g")"
+		rssdate="$(sed -n 2p $filename)"
+		rssdate="$(date -Rd "20${rssdate:6:2}-${rssdate:0:2}-${rssdate:3:2} ${rssdate:9:2}:${rssdate:12:2}")"
 		feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><link>$postlink</link><guid>$postlink</guid></item>"
 	fi
 done
