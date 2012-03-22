@@ -78,7 +78,7 @@ do
 		flattr_link="$(echo $flattr_link | sed -e 's/&/\&amp\;/g' -e 's/</\&lt\;/g' -e 's/>/\&gt\;/g' -e 's/"/\&quot\;/g' -e "s/'/\&#39\;/g")"
 		itunes_subtitle="$(echo $postcontent | cut -c 1-30 | sed 's/<[^>]*>//g')..."
 		if [ "$(echo $(sed -n 3p $filename) | cut -c 1-4)" == "http" ]; then
-			feed="$feed <item><title>$postheadline</title><itunes:author>$author</itunes:author><itunes:subtitle>$itunes_subtitle</itunes:subtitle><itunes:image href=\"$itunes_image\"/><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><enclosure url=\"$enclosure_url\" length=\"\" type=\"audio/mpeg\"/><atom:link rel=\"payment\" href=\"$flattr_link\" type=\"text/html\" /></item>"
+			feed="$feed <item><title>$postheadline</title><itunes:author>$author</itunes:author><itunes:subtitle>$itunes_subtitle</itunes:subtitle><itunes:image href=\"$itunes_image\"/><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><enclosure url=\"$enclosure_url\" length=\"0\" type=\"audio/mpeg\"/><atom:link rel=\"payment\" href=\"$flattr_link\" type=\"text/html\" /></item>"
 		else
 			feed="$feed <item><title>$postheadline</title><pubDate>$rssdate</pubDate><description><![CDATA[$postcontent]]></description><guid>$postlink</guid><link>$postlink</link><itunes:block>yes</itunes:block></item>"
 		fi
