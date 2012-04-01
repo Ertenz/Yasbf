@@ -108,17 +108,17 @@ footer a {
 	font-weight: bold;
 }
 
-article #archives h1 {
+article #archive h1 {
 	font-size: 15px;
 	margin-top: 50px;
 	margin-bottom: 1em;
 }
 
-article #archives ul {
+article #archive ul {
 	list-style-type: none;
 }
 
-article #archives span {
+article #archive span {
 	font-size: small;
 	line-height: 25px;
 	color: #aaaaaa;

@@ -13,9 +13,9 @@ if [ $(echo $url | sed "s/^.*\(.\)$/\1/") = "/" ]; then
 	url=$(echo $url | sed 's/\(.*\)./\1/')
 fi
 
-#Create archives folder (if it doesn't exist)
-if [ ! -d "archives" ]; then
-	mkdir archives
+#Create archive folder (if it doesn't exist)
+if [ ! -d "archive" ]; then
+	mkdir archive
 fi
 
 #Fill feed template with custom content
@@ -45,15 +45,15 @@ do
 	postheadline="$(sed -n 1p $filename)"
 	postdate="$(sed -n '2s/ .*//p' $filename)"
 	postcontent="$(sed -n '4,$p' $filename)"
-	postlink="$url/archives/$postdate/$filename"
+	postlink="$url/archive/$postdate/$filename"
 	article="<h1><a href=\"$postlink\">$postheadline</a></h1> <h3>$postdate</h3> $postcontent"
 	
 	#Generate the blog posts and the archive
-	if [ ! -d "../archives/$postdate" ]; then
-		mkdir "../archives/$postdate"
+	if [ ! -d "../archive/$postdate" ]; then
+		mkdir "../archive/$postdate"
 	fi
-	echo "$headertemplate <article>$article</article> $footertemplate" > ../archives/$postdate/$filename
-	archives="$archives <li><span>$postdate</span> » <a href=\"$postlink\">$postheadline</a></li>"
+	echo "$headertemplate <article>$article</article> $footertemplate" > ../archive/$postdate/$filename
+	archive="$archive <li><span>$postdate</span> » <a href=\"$postlink\">$postheadline</a></li>"
 
 	#Generate the index.html
 	let indexcount=indexcount+1
@@ -81,10 +81,10 @@ echo "Creating rss feed..."
 feed="$feedtemplate $feed </channel></rss>"
 echo $feed > feed.rss
 
-#Create archives.html
-echo "Creating archives..."
-archives="$headertemplate <article><div id=\"archives\"><h1>Blog Archives</h1><ul>$archives</ul></div></article> $footer"
-echo $archives > archives.html
+#Create archive.html
+echo "Creating archive..."
+archive="$headertemplate <article><div id=\"archive\"><h1>Blog Archive</h1><ul>$archive</ul></div></article> $footer"
+echo $archive > archive.html
 
 #Goodbye message
 echo ""
